@@ -1,0 +1,78 @@
+Uses crt;
+Const
+     Garis='-------------------------------------------------------';
+Type
+    Data = Record
+          NPM   : string[8];
+          Nama  : string[25];
+          Usia  : integer;
+End;
+Var
+   File_Data       : File Of Data;
+   Data_Mhs        : Data;
+   i,j,jum1,jum2,gtot : integer;
+Begin
+     jum1:=0;
+     jum2:=0;
+     gtot:=0;
+     Assign(File_Data,'E:\sarmag\sod\tugas_2\Mhs.Dat');
+     Reset(File_Data);
+     clrscr;
+     writeln(' ':30,'Daftar Mahasiswa');
+     writeln;
+     textcolor(9);
+     writeln(Garis);
+     textcolor(11);
+     writeln('| No |    NPM    |            NAMA           |  USIA  |');
+     textcolor(9);
+     writeln(Garis);
+     For i:=1 To 5 Do
+     Begin
+          Read(File_Data,Data_Mhs);
+          with Data_Mhs Do
+          Begin
+               textcolor(5);
+               write('|',i:3,' |',NPM:9,'  | ',Nama:25,' | ',Usia:4,'   |');
+               jum1:=jum1+Usia;
+          End;
+          writeln;
+     End;
+     textcolor(9);
+     writeln(Garis);
+     textcolor(14);
+     write('Jumlah :');
+     writeln(' ':37,'|   ',jum1,'   |');
+     textcolor(9);
+     writeln(Garis);
+     writeln;
+     textcolor(9);
+     writeln(Garis);
+     textcolor(11);
+     writeln('| No |    NPM    |            NAMA           |  USIA  |');
+     textcolor(9);
+     writeln(Garis);
+     For j:=6 to 10 Do
+     Begin
+          Read(File_Data,Data_Mhs);
+          with Data_Mhs Do
+          Begin
+          textcolor(5);
+          write('|',j:3,' |',NPM:9,'  | ',Nama:25,' | ',Usia:4,'   |');
+          jum2:=(jum2+Usia);
+          End;
+     writeln;
+     End;
+     textcolor(9);
+     writeln(Garis);
+     textcolor(14);
+     write('Jumlah :');
+     writeln(' ':37,'|   ',jum2,'   |');
+     textcolor(9);
+     writeln(Garis);
+     writeln;
+     gtot:=jum1+jum2;
+     textcolor(12);
+     write('Grand Total : ');write(gtot);
+     Close(File_Data);
+     readln;
+End.
